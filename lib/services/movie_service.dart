@@ -8,12 +8,12 @@ import 'dart:io';
 class DBService {
   static final DBService _instance = DBService._internal();
 
-  factory DBService()=> _instance;
+  factory DBService() => _instance;
   DBService._internal();
   static Database? _database;
 
-  Future<Database> get database async{
-    if(_database != null) return _database!;
+  Future<Database> get database async {
+    if (_database != null) return _database!;
     _database = await _initDB();
     return _database!;
   }
@@ -23,36 +23,34 @@ class DBService {
     final path = join(directory.path, 'movies.db');
 
     //apre o crea il DB
-    return await openDatabase(
-      path, version:1, onCreate: _onCreate;
-    );
+    return await openDatabase(path, version: 1, onCreate: _onCreate);
   }
 
-  Future<void> _onCreate(Database db, int version) async{
-    await db.execute(
-      '''CREATE TABLE movies(
+  Future<void> _onCreate(Database db, int version) async {
+    await db.execute('''CREATE TABLE movies(
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       title TEXT NOT NULL,
       duration INTEGER NOT NULL,
       plot TEXT NOT NULL,
-      yeat INTEGER NOT NULL)'''
-    );
+      year INTEGER NOT NULL)''');
   }
 
   //future <int> perché ritorna l'id del film
-  Future<int> insertMovie(Movie movie) async{
+  Future<int> insertMovie(Movie movie) async {
     final db = await database;
     return await db.insert(
-      'movies', 
-      movie.toMap(), 
-      conflictAlgorithm: ConflictAlgorithm.replace
+      'movies',
+      movie.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   Future<List<Movie>> getAllMovies() async {
     final db = await database;
     final result = await db.query('movies');
-    return result.map((map) => Movie.fromMap()).toList();
+    return result.map(
+      (map) => Movie.fromMap(map)
+      ).toList();
   }
 
   Future<int> deleteMovie(int id) async {
@@ -60,8 +58,13 @@ class DBService {
     return await db.delete('movies', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<int> updateMovie (Movie movie) async{
+  Future<int> updateMovie(Movie movie) async {
     final db = await database;
-    return db.update('movies', movie.toMap(), where: 'id = ?', whereArgs: [movie.id]);
+    return db.update(
+      'movies',
+      movie.toMap(),
+      where: 'id = ?',
+      whereArgs: [movie.id],
+    );
   }
 }
