@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moviesqlitemvvm/viewmodels/movie_view_model.dart';
 import 'package:moviesqlitemvvm/views/components/movie_form_dialog.dart';
+import 'package:moviesqlitemvvm/views/components/movie_list_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -27,7 +28,7 @@ class HomeView extends StatelessWidget {
               ),
             );
           }
-          return const Text("Lista film");
+          return MovieListWidget();
         },
       ),
       floatingActionButton: FloatingActionButton(

@@ -27,9 +27,16 @@ class MovieViewModel extends ChangeNotifier {
   }
 
   //metodo per cancellare un film
-  Future<void> deleteMovie(int id) async {
-    await _dbService.deleteMovie(id);
-    await fetchMovies();
+  Future<void> deleteMovie(int id, dynamic movie) async {
+    print("1. aggiungo: ${movie.title}");
+
+  await _dbService.insertMovie(movie);
+
+  print("2. film inserito");
+
+  await fetchMovies();
+
+  print("3. film ricaricati: ${movies.length}");
   }
 
   //aggiornare il film

@@ -65,8 +65,9 @@ class _MovieFormDialogState extends State<MovieFormDialog> {
     return AlertDialog(
       title: Text(widget.movie == null ? 'Aggiungi film' : "modifica film"),
       content: SingleChildScrollView(
-        key: _formKey,
+        
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               TextFormField(
