@@ -62,6 +62,58 @@ class _MovieFormDialogState extends State<MovieFormDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return AlertDialog(
+      title: Text(widget.movie == null ? 'Aggiungi film' : "modifica film"),
+      content: SingleChildScrollView(
+        key: _formKey,
+        child: Form(
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _titleController,
+                decoration: const InputDecoration(labelText: "Titolo"),
+                validator: (value) => value == null || value.isEmpty
+                    ? "campo obbligatorio"
+                    : null,
+              ),
+              TextFormField(
+                controller: _durationController,
+                decoration: const InputDecoration(
+                  labelText: "durata in minuti",
+                ),
+                keyboardType: TextInputType.number,
+                validator: (value) =>
+                    value == null || int.tryParse(value) == null
+                    ? "inserisci un numero"
+                    : null,
+              ),
+              TextFormField(
+                controller: _plotController,
+                decoration: const InputDecoration(labelText: "Trama"),
+                validator: (value) => value == null || value.isEmpty
+                    ? "trama obbligatoria"
+                    : null,
+              ),
+              TextFormField(
+                controller: _yearController,
+                decoration: const InputDecoration(labelText: "anno di uscita"),
+                keyboardType: TextInputType.number,
+                validator: (value) =>
+                    value == null || int.tryParse(value) == null
+                    ? "inserisci un anno valido"
+                    : null,
+              ),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text("Annulla"),
+        ),
+        ElevatedButton(onPressed: _submitForm, child: const Text("Salva")),
+      ],
+    );
   }
 }
