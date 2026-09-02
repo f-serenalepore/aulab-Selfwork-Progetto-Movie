@@ -9,13 +9,18 @@ class Movie {
     required this.title,
     required this.duration,
     required this.plot,
-    required this.year, 
+    required this.year,
     this.id,
   });
 
   //metodo per convertire un oggetto dart in una map
   Map<String, dynamic> toMap() {
-    final map = {'title': title, 'duration': duration, 'plot': plot, 'year': year};
+    final map = {
+      'title': title,
+      'duration': duration,
+      'plot': plot,
+      'year': year,
+    };
     if (id != null) {
       map['id'] = id as Object;
     }

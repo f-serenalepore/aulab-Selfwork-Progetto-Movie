@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Movies',
-      home: HomeView(), // la tua schermata principale
+      home: HomeView(),
     );
   }
 }

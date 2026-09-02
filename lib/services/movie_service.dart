@@ -48,9 +48,7 @@ class DBService {
   Future<List<Movie>> getAllMovies() async {
     final db = await database;
     final result = await db.query('movies');
-    return result.map(
-      (map) => Movie.fromMap(map)
-      ).toList();
+    return result.map((map) => Movie.fromMap(map)).toList();
   }
 
   Future<int> deleteMovie(int id) async {
