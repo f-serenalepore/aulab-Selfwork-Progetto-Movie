@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moviesqlitemvvm/views/components/custom_text_filed.dart';
 import 'package:provider/provider.dart';
 import 'package:moviesqlitemvvm/models/movie.dart';
 import 'package:moviesqlitemvvm/viewmodels/movie_view_model.dart';
@@ -50,7 +51,6 @@ class _MovieFormDialogState extends State<MovieFormDialog> {
         plot: _plotController.text,
         year: int.parse(_yearController.text),
       );
-      
 
       final vm = context.read<MovieViewModel>();
       if (widget.movie == null) {
@@ -67,45 +67,49 @@ class _MovieFormDialogState extends State<MovieFormDialog> {
     return AlertDialog(
       title: Text(widget.movie == null ? 'Aggiungi film' : "modifica film"),
       content: SingleChildScrollView(
-        
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
+
+              CustomTextFiled(
                 controller: _titleController,
-                decoration: const InputDecoration(labelText: "Titolo"),
+                label: 'Titolo',
+                keyboardType: TextInputType.text,
                 validator: (value) => value == null || value.isEmpty
                     ? "campo obbligatorio"
                     : null,
               ),
-              TextFormField(
+
+              CustomTextFiled(
                 controller: _durationController,
-                decoration: const InputDecoration(
-                  labelText: "durata in minuti",
-                ),
+                label: 'Durata (minuti)',
                 keyboardType: TextInputType.number,
                 validator: (value) =>
                     value == null || int.tryParse(value) == null
                     ? "inserisci un numero"
                     : null,
               ),
-              TextFormField(
+
+              CustomTextFiled(
                 controller: _plotController,
-                decoration: const InputDecoration(labelText: "Trama"),
+                label: 'Trama',
+                keyboardType: TextInputType.text,
                 validator: (value) => value == null || value.isEmpty
                     ? "trama obbligatoria"
                     : null,
               ),
-              TextFormField(
+
+              CustomTextFiled(
                 controller: _yearController,
-                decoration: const InputDecoration(labelText: "anno di uscita"),
+                label: 'Anno',
                 keyboardType: TextInputType.number,
                 validator: (value) =>
                     value == null || int.tryParse(value) == null
                     ? "inserisci un anno valido"
                     : null,
               ),
+
             ],
           ),
         ),

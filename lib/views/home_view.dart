@@ -9,9 +9,9 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    /*WidgetsBinding.instance.addPostFrameCallback((_) {
       context.watch<MovieViewModel>().fetchMovies();
-    });
+    });*/
     return Scaffold(
       appBar: AppBar(title: Text("Movie Collection APP"), centerTitle: true),
       body: Consumer<MovieViewModel>(

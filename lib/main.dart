@@ -6,7 +6,11 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => MovieViewModel())],
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => MovieViewModel()..fetchMovies(),
+        )
+      ],
       child: const MyApp(),
     ),
   );
